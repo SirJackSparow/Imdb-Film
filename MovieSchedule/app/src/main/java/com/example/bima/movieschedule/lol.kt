@@ -7,6 +7,14 @@ class lol : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        uiji()
+
+    }
+
+
+
+    fun uiji(){
+        print("Hello world")
     }
 
 }
