@@ -37,18 +37,22 @@ class Searching : AppCompatActivity(), GetDatas {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_searching)
 
-        val suggestion = mutableListOf("Batman","Spiderman","dracula","stackoverflow",
-            "antman","robin","avenger","captain","amerika","zoro","wall","f","g","hero","incredible","baby","omar","Prank","Queen")
+//        val suggestion = mutableListOf("Batman","Spiderman","dracula","stackoverflow",
+//            "antman","robin","avenger","captain","amerika","zoro","wall","f","g","hero","incredible","baby","omar","Prank","Queen")
+
         retrofits = ServicesApi.retrofit().create(GetData::class.java)
         adapter = AdapterMovies(datas!!){ctx.startActivity<DetailsMovies>("imdbID" to it.imdbID)}
         presenter = Presenter(this)
+
         item_re.adapter = adapter
+
         item_re.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 var visibleItems = mLayoutManager.childCount
                 var totalItemCount = mLayoutManager.itemCount
                 var pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
+
                 if (dy > 0){
                     if (load){
                         if ((visibleItems + pastVisibleItems)>= totalItemCount) {
@@ -62,6 +66,7 @@ class Searching : AppCompatActivity(), GetDatas {
                 }
             }
         })
+
         mLayoutManager = LinearLayoutManager(this)
         item_re.layoutManager = mLayoutManager
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
